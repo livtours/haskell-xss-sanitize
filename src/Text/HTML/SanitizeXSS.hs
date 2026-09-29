@@ -112,7 +112,7 @@ safeTagsCustom safeName sanitizeAttr (TagOpen name attributes:tags)
 safeTagsCustom n a (t:tags) = t : safeTagsCustom n a tags
 
 -- | Directly removes tags even if they are not closed properly.
--- This is importent to clear out both the script and iframe tag 
+-- This is importent to clear out both the script and iframe tag
 -- in sequences like "<script><iframe></iframe>".
 clearTags :: [Tag Text] -> [Tag Text]
 clearTags = clearTagsCustom clearableTagName
@@ -156,7 +156,7 @@ sanitizeAttribute ("style", value) =
     in  if T.null css then Nothing else Just ("style", css)
 sanitizeAttribute attr | safeAttribute attr = Just attr
                        | otherwise = Nothing
-         
+
 
 -- | Returns @True@ if the specified URI is not a potential security risk.
 sanitaryURI :: Text -> Bool
@@ -206,7 +206,7 @@ acceptable_elements = ["a", "abbr", "acronym", "address", "area",
     "source", "spacer", "span", "strike", "strong", "sub", "sup", "table",
     "tbody", "td", "textarea", "time", "tfoot", "th", "thead", "tr", "tt",
     "u", "ul", "var", "video"]
-  
+
 mathml_elements :: [Text]
 mathml_elements = ["maction", "math", "merror", "mfrac", "mi",
     "mmultiscripts", "mn", "mo", "mover", "mpadded", "mphantom",
@@ -222,7 +222,7 @@ svg_elements = ["a", "animate", "animateColor", "animateMotion",
     "linearGradient", "line", "marker", "metadata", "missing-glyph",
     "mpath", "path", "polygon", "polyline", "radialGradient", "rect",
     "set", "stop", "svg", "switch", "text", "title", "tspan", "use"]
-  
+
 acceptable_attributes :: [Text]
 acceptable_attributes = ["abbr", "accept", "accept-charset", "accesskey",
     "align", "alt", "autocomplete", "autofocus", "axis",
@@ -252,10 +252,7 @@ acceptable_attributes = ["abbr", "accept", "accept-charset", "accesskey",
     "width", "wrap", "xml:lang"]
 
 acceptable_protocols :: [String]
-acceptable_protocols = [ "ed2k", "ftp", "http", "https", "irc",
-    "mailto", "news", "gopher", "nntp", "telnet", "webcal",
-    "xmpp", "callto", "feed", "urn", "aim", "rsync", "tag",
-    "ssh", "sftp", "rtsp", "afs" ]
+acceptable_protocols = [ "http", "https" ]
 
 mathml_attributes :: [Text]
 mathml_attributes = ["actiontype", "align", "columnalign", "columnalign",

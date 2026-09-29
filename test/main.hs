@@ -52,6 +52,15 @@ main = hspec $ do
     it "ucase image hack" $
       sanitized "<IMG src=javascript:alert('XSS') />" "<img />"
 
+    it "allows http" $
+      sanitized "<img src=\"http://mypage.com\" /><a href=\"http://mypage.com\"></a>" "<img src=\"http://mypage.com\" /><a href=\"http://mypage.com\"></a>"
+
+    it "allows https" $
+      sanitized "<img src=\"https://mypage.com\" /><a href=\"https://mypage.com\"></a>" "<img src=\"https://mypage.com\" /><a href=\"https://mypage.com\"></a>"
+
+    it "disallows mailto" $
+      sanitized "<a href=\"mailto:someone@example.com?cc=someoneelse@example.com&bcc=andsomeoneelse@example.com&subject=Summer%20Party&body=You%20are%20invited%20to%20a%20big%20summer%20party!\" target=\"_top\">Send mail!</a>" "<a target=\"_top\">Send mail!</a>"
+
   describe "allowedCssAttributeValue" $ do
     it "allows hex" $ do
       assert $ allowedCssAttributeValue "#abc"
